@@ -26,7 +26,7 @@
         android:drawableLeft="@drawable/ic_baseline_person"
         android:elevation="3dp"
         android:padding="13dp"
-        android:text="Name"
+        android:hint="Name"
         android:textColor="@color/purple_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
         android:elevation="3dp"
         android:padding="13dp"
         android:layout_marginTop="20dp"
-        android:text="Email"
+        android:hint="Email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reg_name"
@@ -59,15 +59,15 @@
         android:drawableLeft="@drawable/keylog"
         android:elevation="3dp"
         android:padding="13dp"
-        android:text="Password"
+        android:hint="Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reg_email"
         app:layout_constraintWidth_percent=".8" />
 
     <Button
-        android:id="@+id/login_btn"
-        style="bold"
+        android:id="@+id/reg_btn"
+        android:textStyle="bold"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:padding="14dp"
@@ -87,7 +87,7 @@
         android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/reg_btn" />
 
     <TextView
         android:id="@+id/reg_login"
@@ -101,8 +101,5 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView2" />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
