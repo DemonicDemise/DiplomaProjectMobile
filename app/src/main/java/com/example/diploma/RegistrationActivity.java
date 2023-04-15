@@ -11,20 +11,29 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.diploma.models.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class RegistrationActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private FirebaseDatabase db;
     private Button signUp;
     private EditText name, email, password;
     private TextView signIn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        db = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         signUp = findViewById(R.id.reg_btn);
         name = findViewById(R.id.reg_name);
@@ -42,10 +51,10 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createUser();
+               // pCreateUser();
             }
         });
     }
-
     private void createUser() {
         String userName = name.getText().toString();
         String userEmail = email.getText().toString();
@@ -71,6 +80,10 @@ public class RegistrationActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
+                        UserModel userModel = new UserModel(userName, userEmail, userPassword);
+                        String id = task.getResult().getUser().getUid();
+                        db.getReference().child("Users").child(id).setValue(userModel);
+
                         Toast.makeText(RegistrationActivity.this, "Registration Successfully",Toast.LENGTH_LONG).show();
                     }
                     else{
@@ -78,4 +91,9 @@ public class RegistrationActivity extends AppCompatActivity {
                     }
                 });
     }
+
+//    private void pCreateUser() throws SQLException {
+//        Connection conn = DriverManager.getConnection("jdbc:postgresql://<host>:<port>/<database>", "<username>", "<password>");
+//
+//    }
 }
