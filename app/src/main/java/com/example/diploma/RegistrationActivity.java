@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText name, email, password;
     private TextView signIn;
 
+    private ProgressBar pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,9 @@ public class RegistrationActivity extends AppCompatActivity {
         password = findViewById(R.id.reg_password);
         signIn = findViewById(R.id.reg_login);
 
+        pb = findViewById(R.id.progressbar);
+        pb.setVisibility(View.GONE);
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +57,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createUser();
+                pb.setVisibility(View.VISIBLE);
                // pCreateUser();
             }
         });
@@ -83,10 +90,12 @@ public class RegistrationActivity extends AppCompatActivity {
                         UserModel userModel = new UserModel(userName, userEmail, userPassword);
                         String id = task.getResult().getUser().getUid();
                         db.getReference().child("Users").child(id).setValue(userModel);
-
+                        pb.setVisibility(View.GONE);
                         Toast.makeText(RegistrationActivity.this, "Registration Successfully",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
                     }
                     else{
+                        pb.setVisibility(View.GONE);
                         Toast.makeText(RegistrationActivity.this, "Error:" + task.getException(),Toast.LENGTH_LONG);
                     }
                 });
