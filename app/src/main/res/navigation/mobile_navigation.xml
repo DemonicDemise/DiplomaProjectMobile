@@ -12,6 +12,18 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/nav_category"
+        android:name="com.example.diploma.ui.category.CategoryFragment"
+        android:label="@string/menu_category"
+        tools:layout="@layout/fragment_category" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.diploma.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.diploma.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
