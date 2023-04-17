@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.diploma.databinding.FragmentGalleryBinding;
 import com.example.diploma.databinding.FragmentProfileBinding;
 
 public class ProfileFragment extends Fragment {

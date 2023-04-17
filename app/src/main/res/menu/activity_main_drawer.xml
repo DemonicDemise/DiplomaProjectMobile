@@ -10,27 +10,27 @@
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_category"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/baseline_category_24"
             android:title="@string/menu_category" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_baseline_person"
             android:title="@string/menu_profile" />
         <item
             android:id="@+id/nav_offers"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/baseline_local_offer_24"
             android:title="@string/menu_offers" />
         <item
             android:id="@+id/nav_new_products"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/baseline_autorenew_24"
             android:title="@string/menu_new_products" />
         <item
             android:id="@+id/nav_my_orders"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/baseline_shopping_cart_24"
             android:title="@string/menu_orders" />
         <item
             android:id="@+id/nav_my_carts"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/baseline_shopping_cart_24"
             android:title="@string/menu_carts" />
     </group>
 </menu>

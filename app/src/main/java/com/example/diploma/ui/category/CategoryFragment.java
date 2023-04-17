@@ -10,21 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.diploma.databinding.FragmentGalleryBinding;
+import com.example.diploma.databinding.FragmentCategoryBinding;
+
 
 public class CategoryFragment extends Fragment {
 
-    private FragmentGalleryBinding binding;
+    private FragmentCategoryBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         CategoryViewModel categoryViewModel =
                 new ViewModelProvider(this).get(CategoryViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentCategoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
+        final TextView textView = binding.textCategory;
         categoryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }

@@ -27,16 +27,16 @@
         android:id="@+id/nav_offers"
         android:name="com.example.diploma.ui.offer.OffersFragment"
         android:label="@string/menu_offers"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_offers" />
 
     <fragment
         android:id="@+id/nav_new_products"
         android:name="com.example.diploma.ui.product.NewProductsFragment"
         android:label="@string/menu_new_products"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_new_products" />
     <fragment
         android:id="@+id/nav_my_orders"
-        android:name="com.example.diploma.ui.oder.MyOrdersFragment"
+        android:name="com.example.diploma.ui.order.MyOrdersFragment"
         android:label="@string/menu_orders"
         tools:layout="@layout/fragment_my_orders" />
     <fragment
