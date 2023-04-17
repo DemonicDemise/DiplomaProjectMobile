@@ -24,14 +24,24 @@
         tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.diploma.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:id="@+id/nav_offers"
+        android:name="com.example.diploma.ui.offer.OffersFragment"
+        android:label="@string/menu_offers"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.diploma.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:id="@+id/nav_new_products"
+        android:name="com.example.diploma.ui.product.NewProductsFragment"
+        android:label="@string/menu_new_products"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_my_orders"
+        android:name="com.example.diploma.ui.oder.MyOrdersFragment"
+        android:label="@string/menu_orders"
+        tools:layout="@layout/fragment_my_orders" />
+    <fragment
+        android:id="@+id/nav_my_carts"
+        android:name="com.example.diploma.ui.cart.MyCartsFragment"
+        android:label="@string/menu_carts"
+        tools:layout="@layout/fragment_my_carts" />
 </navigation>
