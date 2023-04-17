@@ -14,5 +14,11 @@
     <string name="menu_offers">Offers</string>
     <string name="menu_new_products">New Products</string>
     <string name="menu_carts">My Carts</string>
+    <string name="popular_products">Popular Products</string>
+    <string name="view_all">View all</string>
+    <string name="explore_products">Explore Products</string>
+    <string name="recommended_products">Recommended Products</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_item_here">Search Item Here</string>
+
 </resources>
