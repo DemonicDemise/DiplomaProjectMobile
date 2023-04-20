@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.diploma.adapters.HomeAdapter;
 import com.example.diploma.adapters.PopularAdapters;
+import com.example.diploma.adapters.RecommendedAdapter;
 import com.example.diploma.databinding.FragmentHomeBinding;
 import com.example.diploma.models.HomeModel;
 import com.example.diploma.models.PopularModel;
+import com.example.diploma.models.RecommendedModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,13 +34,18 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private List<PopularModel> popularModelList;
     private List<HomeModel> homeModelList;
+
+    private List<RecommendedModel> recommendedModelList;
     private PopularAdapters popularAdapters;
-
     private HomeAdapter homeAdapter;
-
+    private RecommendedAdapter recommendedAdapter;
     private FirebaseFirestore db;
     private RecyclerView popularRec;
     private RecyclerView homeRec;
+
+    private RecyclerView recRec;
+
+    private ProgressBar pb;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +55,8 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         db = FirebaseFirestore.getInstance();
+        pb = binding.progressBar;
+        pb.setVisibility(View.GONE);
 
         popularRec = binding.popRec;
 
@@ -98,8 +108,30 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
+        //Recommended item
+        recRec = binding.recRec;
 
+        recRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        recommendedModelList = new ArrayList<>();
+        recommendedAdapter= new RecommendedAdapter(getActivity(), recommendedModelList);
+        recRec.setAdapter(recommendedAdapter);
 
+        db.collection("RecommendedProducts")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                RecommendedModel recModel = document.toObject(RecommendedModel.class);
+                                recommendedModelList.add(recModel);
+                                recommendedAdapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), "Error" + task.getException(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
 
         return root;
     }
