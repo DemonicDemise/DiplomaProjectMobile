@@ -20,5 +20,6 @@
     <string name="recommended_products">Recommended Products</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_item_here">Search Item Here</string>
+    <string name="category">Category</string>
 
 </resources>
