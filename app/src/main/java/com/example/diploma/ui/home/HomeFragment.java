@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,18 +35,15 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private List<PopularModel> popularModelList;
     private List<HomeModel> homeModelList;
-
     private List<RecommendedModel> recommendedModelList;
     private PopularAdapters popularAdapters;
     private HomeAdapter homeAdapter;
     private RecommendedAdapter recommendedAdapter;
     private FirebaseFirestore db;
-    private RecyclerView popularRec;
-    private RecyclerView homeRec;
-
-    private RecyclerView recRec;
-
+    private RecyclerView popularRec, homeRec, recRec;
     private ProgressBar pb;
+
+    private ScrollView scrollView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +54,10 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         db = FirebaseFirestore.getInstance();
         pb = binding.progressBar;
-        pb.setVisibility(View.GONE);
+        scrollView = binding.scrollView;
+
+        pb.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.GONE);
 
         popularRec = binding.popRec;
 
@@ -76,6 +77,10 @@ public class HomeFragment extends Fragment {
                                 PopularModel popularModel = document.toObject(PopularModel.class);
                                 popularModelList.add(popularModel);
                                 popularAdapters.notifyDataSetChanged();
+
+                                pb.setVisibility(View.GONE);
+                                scrollView.setVisibility(View.VISIBLE);
+
                             }
                         } else {
                             Toast.makeText(getActivity(), "Error" + task.getException(), Toast.LENGTH_LONG).show();

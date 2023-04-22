@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context=".ui.category.CategoryFragment">
+    tools:context=".activities.ViewAllActivity">
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="70dp"
@@ -32,25 +32,13 @@
                     android:fontFamily="@font/arbutus_slab"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:text="@string/category"/>
-                <TextView
-                    android:id="@+id/view_all_products"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/arbutus_slab"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:gravity="end"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginRight="7dp"
                     android:text="@string/view_all"/>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/view_rec"
                 android:layout_width="match_parent"
                 android:layout_margin="5dp"
-                android:id="@+id/nav_cat_rec"
                 android:layout_height="match_parent">
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>

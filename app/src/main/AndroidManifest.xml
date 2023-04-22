@@ -14,11 +14,16 @@
         <activity
             android:name=".activities.RegistrationActivity"
             android:exported="false" />
+
         <activity
             android:name=".activities.LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.Diploma.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.Diploma.NoActionBar"/>
+
+        <activity
+            android:name=".activities.ViewAllActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Diploma.NoActionBar"/>
 
         <activity
             android:name=".MainActivity"
