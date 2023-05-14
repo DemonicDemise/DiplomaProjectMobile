@@ -1,5 +1,6 @@
 package com.example.diploma.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.diploma.activities.LoginActivity;
 import com.example.diploma.databinding.FragmentProfileBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
+
+    private FirebaseAuth mAuth;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -23,6 +28,15 @@ public class ProfileFragment extends Fragment {
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        mAuth = FirebaseAuth.getInstance();
+
+        if(mAuth.getCurrentUser() == null){
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+        }
+
+
 
         return root;
     }

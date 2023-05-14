@@ -20,7 +20,6 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
-
             <EditText
                 android:id="@+id/search_box"
                 android:layout_width="match_parent"
@@ -28,6 +27,7 @@
                 android:layout_margin="8dp"
                 android:drawableLeft="@drawable/baseline_search_24"
                 android:drawablePadding="5dp"
+                android:background="@drawable/search_gb"
                 android:fontFamily="@font/arbutus_slab"
                 android:hint="@string/search_item_here" />
 

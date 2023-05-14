@@ -51,6 +51,9 @@ dependencies {
     //circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //lottie animation
+    implementation 'com.airbnb.android:lottie:5.0.3'
+
     implementation 'com.google.firebase:firebase-auth:21.2.0'
     implementation 'com.google.firebase:firebase-database:20.0.4'
     implementation 'com.google.firebase:firebase-firestore:24.1.1'

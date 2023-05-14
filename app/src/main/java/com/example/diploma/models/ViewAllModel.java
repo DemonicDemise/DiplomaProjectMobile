@@ -1,11 +1,15 @@
 package com.example.diploma.models;
 
-public class ViewAllModel {
-    String name;
-    String description;
-    String rating;
-    String price;
-    String img_url;
+import androidx.navigation.NavType;
+
+import java.io.Serializable;
+
+public class ViewAllModel implements Serializable {
+    private String name;
+    private String description;
+    private String rating;
+    private String price;
+    private String img_url;
 
     public ViewAllModel() {
     }
