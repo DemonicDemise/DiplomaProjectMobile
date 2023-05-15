@@ -12,12 +12,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.diploma.activities.LoginActivity;
-import com.example.diploma.activities.NavCategoryActivity;
 import com.example.diploma.databinding.ActivityMainBinding;
 import com.example.diploma.models.UserModel;
 import com.example.diploma.ui.cart.UserCartFragment;
 import com.example.diploma.ui.category.CategoryFragment;
-import com.example.diploma.ui.favorite.FavouriteFragment;
+import com.example.diploma.ui.favourite.FavouriteFragment;
 import com.example.diploma.ui.home.HomeFragment;
 import com.example.diploma.ui.order.UserOrderFragment;
 import com.example.diploma.ui.profile.ProfileFragment;
@@ -25,7 +24,6 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;

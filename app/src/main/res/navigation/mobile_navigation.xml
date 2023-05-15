@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_category" />
     <fragment
         android:id="@+id/nav_favourite"
-        android:name="com.example.diploma.ui.favorite.FavouriteFragment"
+        android:name="com.example.diploma.ui.favourite.FavouriteFragment"
         android:label="@string/favourites"
         tools:layout="@layout/fragment_favourite"/>
     <fragment

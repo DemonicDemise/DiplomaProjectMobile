@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
+import com.example.diploma.MainActivity;
 import com.example.diploma.R;
 import com.example.diploma.models.ViewAllModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -162,6 +163,7 @@ public class DetailActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             Toast.makeText(getApplicationContext(), "You may seen in favourites section", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
                         }
                     });
@@ -198,6 +200,7 @@ public class DetailActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             Toast.makeText(DetailActivity.this, "Added To A Cart", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
                         }
                     });

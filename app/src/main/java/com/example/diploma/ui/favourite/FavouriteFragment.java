@@ -1,4 +1,4 @@
-package com.example.diploma.ui.favorite;
+package com.example.diploma.ui.favourite;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

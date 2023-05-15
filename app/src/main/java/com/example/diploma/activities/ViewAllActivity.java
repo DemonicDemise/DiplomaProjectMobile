@@ -65,7 +65,22 @@ public class ViewAllActivity extends AppCompatActivity {
                     }
                 }
             });
+        }
 
+        //Getting breakfasts
+        if (type != null && type.equalsIgnoreCase("breakfast")) {
+            firestore.collection("AllProducts").whereEqualTo("type", "breakfast")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                                ViewAllModel viewAllModel = documentSnapshot.toObject(ViewAllModel.class);
+                                viewAllModelList.add(viewAllModel);
+                                viewAllAdapter.notifyDataSetChanged();
+                                recyclerView.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    });
         }
 
 //        if(type != null && type.equalsIgnoreCase("phone")){
