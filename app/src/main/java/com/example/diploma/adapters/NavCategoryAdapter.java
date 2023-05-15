@@ -45,7 +45,7 @@ public class NavCategoryAdapter extends RecyclerView.Adapter<NavCategoryAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, CategoryFragment.class);
+                Intent intent = new Intent(context, NavCategoryActivity.class);
                 intent.putExtra("type", navCategoryModelsList.get(position).getType());
                 context.startActivity(intent);
             }

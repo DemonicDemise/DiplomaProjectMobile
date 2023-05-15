@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.diploma.activities.LoginActivity;
+import com.example.diploma.activities.NavCategoryActivity;
 import com.example.diploma.databinding.ActivityMainBinding;
 import com.example.diploma.models.UserModel;
 import com.example.diploma.ui.cart.UserCartFragment;
@@ -68,15 +69,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = binding.navView;
 
-        //Hooks
-//        drawerLayout = findViewById(R.id.drawer_layout);
-//        navigationView = findViewById(R.id.nav_view);
-//        toolbar = findViewById(R.id.toolbar);
         toolbar = binding.appBarMain.toolbarMain;
         //Toolbar
         setSupportActionBar(toolbar);
-
-       // setSupportActionBar(binding.appBarMain.toolbar);
 
 //        logoImg = findViewById(R.id.logoImg);
 //        logoImg.setOnClickListener(new View.OnClickListener() {
@@ -139,22 +134,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finish();
         }
-
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        mAppBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.nav_home, R.id.nav_category,R.id.nav_profile,
-//                R.id.nav_offers, R.id.nav_new_products, R.id.nav_my_orders,
-//                R.id.nav_my_carts)
-//                .setOpenableLayout(drawer)
-//                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-//        NavigationUI.setupWithNavController(navigationView, navController);
-//        if(mAuth.getCurrentUser() == null) {
-//            Intent intent = new Intent(this, LoginActivity.class);
-//            startActivity(intent);
-//        }
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -166,7 +145,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(new FavouriteFragment());
                 break;
             case R.id.nav_category:
-                replaceFragment(new CategoryFragment());
+                Intent intent = new Intent(getApplicationContext(), NavCategoryActivity.class);
+                startActivity(intent);
+                //replaceFragment(new CategoryFragment());
                 break;
 //            case R.id.nav_orders:
 //                replaceFragment(new UserOrderFragment());

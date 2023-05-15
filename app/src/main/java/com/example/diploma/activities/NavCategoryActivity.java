@@ -29,6 +29,8 @@ public class NavCategoryActivity extends AppCompatActivity {
     private FirebaseFirestore mDb;
     private ProgressBar progressBar;
 
+    private String type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +41,14 @@ public class NavCategoryActivity extends AppCompatActivity {
 
         mDb = FirebaseFirestore.getInstance();
 
-        String type = getIntent().getStringExtra("type");
+        type = getIntent().getStringExtra("type");
 
         recyclerView = findViewById(R.id.nav_category_detail);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
         recyclerView.setVisibility(View.GONE);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+ //       recyclerView.setVisibility(View.VISIBLE);
         list = new ArrayList<>();
-        adapter = new NavCategoryDetailAdapter(getApplicationContext(), list);
+        adapter = new NavCategoryDetailAdapter(this, list);
         recyclerView.setAdapter(adapter);
 
         //Getting vegetable

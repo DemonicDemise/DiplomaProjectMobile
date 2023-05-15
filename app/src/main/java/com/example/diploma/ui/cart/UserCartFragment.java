@@ -42,23 +42,16 @@ public class UserCartFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore mDb;
-
     private RecyclerView recyclerView;
     private UserCartAdapter userCartAdapter;
     private List<UserCartModel> userCartModelList;
-
     private ProgressBar progressBar;
     private TextView overTotalAmount;
     private Button buyNow;
-
     private String documentId;
-
     private Spinner spinner;
-
     public UserCartFragment(){
-
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -77,9 +70,6 @@ public class UserCartFragment extends Fragment {
         buyNow = root.findViewById(R.id.cart_buy_now);
 
         overTotalAmount = root.findViewById(R.id.total_price);
-
-        LocalBroadcastManager.getInstance(getActivity())
-                .registerReceiver(mMessageReceiver, new IntentFilter("MyTotalAmount"));
 
         userCartModelList = new ArrayList<>();
         userCartAdapter = new UserCartAdapter(getActivity(), userCartModelList);
@@ -188,13 +178,4 @@ public class UserCartFragment extends Fragment {
         }
         overTotalAmount.setText("Total Sum: " + totalSum);
     }
-
-    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            int totalBil = intent.getIntExtra("totalAmount",0);
-            overTotalAmount.setText("Total Bil: " + totalBil);
-
-        }
-    };
 }

@@ -28,9 +28,6 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.ViewHo
 
     private Context context;
     private List<UserCartModel> userCartModelList;
-    private TextView totalAmount;
-    private BottomSheetDialog bottomSheetDialog;
-    private int totalPrice;
     FirebaseFirestore mDb;
     FirebaseAuth mAuth;
 
@@ -57,12 +54,6 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.ViewHo
         holder.quantity.setText(userCartModelList.get(position).getTotalQuantity());
         holder.totalPrice.setText(String.valueOf(userCartModelList.get(position).getTotalPrice()) + "$");
 
-
-        totalPrice += userCartModelList.get(position).getTotalPrice();
-
-        Intent intent = new Intent("MyTotalAmount");
-        intent.putExtra("totalAmount", totalPrice);
-        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
