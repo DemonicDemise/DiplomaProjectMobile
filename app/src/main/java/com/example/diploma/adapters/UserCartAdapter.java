@@ -89,7 +89,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 if(mAuth.getCurrentUser() != null) {
-                    mDb.collection("UserCollection").document(mAuth.getCurrentUser().getUid())
+                    mDb.collection("CurrentUser").document(mAuth.getCurrentUser().getUid())
                             .collection("AddToCart")
                             .document(userCartModelList.get(position).getDocumentId())
                             .delete()

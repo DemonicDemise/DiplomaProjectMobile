@@ -2,29 +2,39 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context=".ui.category.CategoryFragment">
+    android:background="@color/white"
+    tools:context=".activities.NavCategoryActivity">
 
     <ProgressBar
-        android:id="@+id/category_progressBar"
+        android:id="@+id/nav_category_progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cat_rec" />
+        app:layout_constraintTop_toBottomOf="@+id/nav_category_toolbar" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/nav_category_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@color/black"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/detailed_product" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cat_rec"
-        android:layout_marginTop="5dp"
+        android:id="@+id/nav_category_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/nav_category_toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

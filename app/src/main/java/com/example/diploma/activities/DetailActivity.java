@@ -76,8 +76,6 @@ public class DetailActivity extends AppCompatActivity {
             description.setText(viewAllModel.getDescription());
             price.setText(viewAllModel.getPrice() + "$");
 
-//            if(viewAllModel.getType().)
-
             totalPrice = totalQuantity * Integer.valueOf(viewAllModel.getPrice());
         }
 
@@ -132,6 +130,7 @@ public class DetailActivity extends AppCompatActivity {
                 }
             }
         });
+
         btnLike = false;
         lottieLike.setOnClickListener(new View.OnClickListener() {
             @Override

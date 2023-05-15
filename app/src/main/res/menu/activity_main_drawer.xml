@@ -1,36 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+xmlns:tools="http://schemas.android.com/tools"
+tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_category"
-            android:icon="@drawable/baseline_category_24"
-            android:title="@string/menu_category" />
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_baseline_person"
-            android:title="@string/menu_profile" />
-        <item
-            android:id="@+id/nav_offers"
-            android:icon="@drawable/baseline_local_offer_24"
-            android:title="@string/menu_offers" />
-        <item
-            android:id="@+id/nav_new_products"
-            android:icon="@drawable/baseline_autorenew_24"
-            android:title="@string/menu_new_products" />
-        <item
-            android:id="@+id/nav_my_orders"
-            android:icon="@drawable/baseline_shopping_cart_24"
-            android:title="@string/menu_orders" />
-        <item
-            android:id="@+id/nav_my_carts"
-            android:icon="@drawable/baseline_shopping_cart_24"
-            android:title="@string/menu_carts" />
-    </group>
+<group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home"
+        />
+    <item
+        android:id="@+id/nav_category"
+        android:icon="@drawable/ic_category"
+        android:title="@string/category"
+        />
+    <item
+        android:id="@+id/nav_favourite"
+        android:icon="@drawable/ic_favourite"
+        android:title="@string/favourites"
+        />
+    <item
+        android:id="@+id/nav_my_orders"
+        android:icon="@drawable/user_orders"
+        android:title="@string/orders"
+        />
+    <item
+        android:id="@+id/nav_my_carts"
+        android:icon="@drawable/user_add_to_cart"
+        android:title="@string/cart"
+        />
+</group>
+<item android:title="Profile">
+    <menu>
+        <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_login"
+                android:icon="@drawable/ic_login"
+                android:title="@string/login"
+                />
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_person"
+                android:title="@string/profile"
+                />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_reply"
+                android:title="@string/logout"
+                />
+        </group>
+    </menu>
+</item>
+<item android:title="Communicate">
+    <menu>
+        <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_admin"
+                android:icon="@drawable/ic_admin"
+                android:title="@string/admin_page"
+                />
+            <item
+                android:id="@+id/nav_rate_us"
+                android:icon="@drawable/ic_rate"
+                android:title="@string/rate_us"
+                />
+        </group>
+    </menu>
+</item>
 </menu>
