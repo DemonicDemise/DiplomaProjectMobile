@@ -64,8 +64,8 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         UserModel userModel = snapshot.getValue(UserModel.class);
-                       // Glide.with(getContext()).load(userModel.getProfileImg()).into(profileImg);
-                       // Glide.with(getContext()).load(userModel.getNavBackgroundImg()).into(navBackgroundImg);
+                        Glide.with(getContext()).load(userModel.getProfileImg()).into(profileImg);
+                        Glide.with(getContext()).load(userModel.getNavBackgroundImg()).into(navBackgroundImg);
                     }
 
                     @Override
@@ -119,16 +119,14 @@ public class ProfileFragment extends Fragment {
                     Intent data = result.getData();
                     if(result.getResultCode() == Activity.RESULT_OK && data.getData() != null){
                         Uri navBackImgUri = data.getData();
-                        profileImg.setImageURI(navBackImgUri);
+                        navBackgroundImg.setImageURI(navBackImgUri);
 
                         final StorageReference referenceBack = mStorage.getReference().child("background_picture")
                                 .child(FirebaseAuth.getInstance().getUid());
-
                         referenceBack.putFile(navBackImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 Toast.makeText(getContext(), "Background Image Uploaded", Toast.LENGTH_LONG).show();
-
                                 referenceBack.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
@@ -144,7 +142,6 @@ public class ProfileFragment extends Fragment {
             }
     );
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -153,7 +150,7 @@ public class ProfileFragment extends Fragment {
             Uri profileUri = data.getData();
             profileImg.setImageURI(profileUri);
 
-            final StorageReference reference = mStorage.getReference().child("users").child("profile_picture")
+            final StorageReference reference = mStorage.getReference().child("Users").child("profile_picture")
                     .child(FirebaseAuth.getInstance().getUid());
             reference.putFile(profileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override

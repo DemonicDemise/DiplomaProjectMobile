@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.diploma.R;
+import com.example.diploma.activities.PlaceOrderActivity;
 import com.example.diploma.adapters.UserCartAdapter;
 import com.example.diploma.models.UserCartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -148,9 +149,9 @@ public class UserCartFragment extends Fragment {
                     public void onClick(View view) {
                         Toast.makeText(getContext(), "Place Order", Toast.LENGTH_LONG).show();
                         bottomSheetDialog.dismiss();
-//                        Intent intent = new Intent(getActivity(), PlaceOrderActivity.class);
-//                        intent.putExtra("itemList", (Serializable) userCartModelList);
-//                        startActivity(intent);
+                        Intent intent = new Intent(getActivity(), PlaceOrderActivity.class);
+                        intent.putExtra("itemList", (Serializable) userCartModelList);
+                        startActivity(intent);
                     }
                 });
                 bottomSheetDialog.setContentView(bottomSheetView);

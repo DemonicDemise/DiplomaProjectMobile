@@ -39,20 +39,20 @@
     <string name="back">Back</string>
     <string name="enter_your_email">Enter Your Email</string>
     <string name="reset_password">Reset Password</string>
-    <string name="company_name">Gadget Store</string>
-    <string name="welcome_to_gadget_store_app">Welcome to Gadget Store App!</string>
+    <string name="company_name">Diploma Store</string>
+    <string name="welcome_to_gadget_store_app">Welcome to Diploma Store App!</string>
     <string name="home">Home</string>
     <string name="gallery">Gallery</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
-    <string name="company_link">https://www.gagetstore.com</string>
+    <string name="company_link">https://www.diplomastore.com</string>
 
     <string name="logout">Logout</string>
     <string name="share">Share</string>
     <string name="rate_us">Rate Us</string>
     <string name="products">Products</string>
-    <string name="gadgets">Gadgets</string>
-    <string name="gadgets_and_mobile_phones">Gadgets and Mobile Phones</string>
+    <string name="gadgets">Diploma</string>
+    <string name="gadgets_and_mobile_phones">Diploma and Mobile Phones</string>
     <string name="no_product">Sorry There Is No New Product Yet</string>
     <string name="cart_empty">Your Cart Is Empty</string>
     <string name="no_purchase">You Have Not Purchased Anything Yet</string>

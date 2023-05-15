@@ -10,7 +10,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.diploma.activities.LoginActivity;
+import com.example.diploma.databinding.ActivityMainBinding;
+import com.example.diploma.models.UserModel;
 import com.example.diploma.ui.cart.UserCartFragment;
 import com.example.diploma.ui.category.CategoryFragment;
 import com.example.diploma.ui.favorite.FavouriteFragment;
@@ -30,8 +33,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.diploma.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -41,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActivityMainBinding binding;
 
     private ProgressBar pb;
+    private FirebaseDatabase mDb;
     private FirebaseAuth mAuth;
     private Toolbar toolbar;
 
@@ -52,16 +59,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mAuth = FirebaseAuth.getInstance();
 
+        mDb = FirebaseDatabase.getInstance();
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-//        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         drawerLayout = binding.drawerLayout;
 
@@ -85,7 +86,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            }
 //        });
 
-        //Hide or show menu
+        if(mAuth.getCurrentUser() == null) {
+            Intent intent = new Intent(getApplication(), LoginActivity.class);
+            startActivity(intent);
+        }
+
+            //Hide or show menu
         Menu menu = navigationView.getMenu();
         if(mAuth.getCurrentUser() == null) {
             menu.findItem(R.id.nav_logout).setVisible(false);
@@ -106,12 +112,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
 
-//        View headerView = navigationView.getHeaderView(0);
-//        TextView headerName = headerView.findViewById(R.id.nav_header_name);
-//        TextView headerEmail = headerView.findViewById(R.id.nav_header_email);
-//        CircleImageView headerImg = headerView.findViewById(R.id.nav_header_img);
-//        ImageView navImageView = headerView.findViewById(R.id.nav_background_img);
+        View headerView = navigationView.getHeaderView(0);
+        TextView headerName = headerView.findViewById(R.id.nav_header_name);
+        TextView headerEmail = headerView.findViewById(R.id.nav_header_email);
+        CircleImageView headerImg = headerView.findViewById(R.id.nav_header_img);
+        ImageView navImageView = headerView.findViewById(R.id.nav_background_img);
 
+        if(mAuth.getCurrentUser() != null) {
+            mDb.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            UserModel userModel = snapshot.getValue(UserModel.class);
+
+                            headerName.setText(userModel.name);
+                            headerEmail.setText(userModel.email);
+                            Glide.with(getApplicationContext()).load(userModel.getProfileImg()).into(headerImg);
+                          //  Glide.with(getApplicationContext()).load(userModel.getNavBackgroundImg()).into(navImageView);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+        }else{
+            Toast.makeText(getApplicationContext(), "You are not logged in! Login first", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
+        }
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -182,18 +209,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment);
         fragmentTransaction.commit();
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-//        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-//                || super.onSupportNavigateUp();
-//    }
 }
