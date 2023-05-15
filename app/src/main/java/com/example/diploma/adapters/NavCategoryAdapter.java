@@ -50,15 +50,6 @@ public class NavCategoryAdapter extends RecyclerView.Adapter<NavCategoryAdapter.
                 context.startActivity(intent);
             }
         });
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CategoryFragment categoryFragment = new CategoryFragment();
-                Bundle args = new Bundle();
-                args.putString("type", navCategoryModelsList.get(position).getType());
-                categoryFragment.setArguments(args);
-            }
-        });
     }
 
     @Override

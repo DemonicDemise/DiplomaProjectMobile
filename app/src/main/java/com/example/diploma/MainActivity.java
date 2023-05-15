@@ -19,6 +19,7 @@ import com.example.diploma.ui.cart.UserCartFragment;
 import com.example.diploma.ui.category.CategoryFragment;
 import com.example.diploma.ui.favorite.FavouriteFragment;
 import com.example.diploma.ui.home.HomeFragment;
+import com.example.diploma.ui.order.UserOrderFragment;
 import com.example.diploma.ui.profile.ProfileFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -145,14 +146,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(new FavouriteFragment());
                 break;
             case R.id.nav_category:
-                Intent intent = new Intent(getApplicationContext(), NavCategoryActivity.class);
-                startActivity(intent);
-                //replaceFragment(new CategoryFragment());
+//                Intent intent = new Intent(getApplicationContext(), NavCategoryActivity.class);
+//                startActivity(intent);
+                replaceFragment(new CategoryFragment());
                 break;
-//            case R.id.nav_orders:
-//                replaceFragment(new UserOrderFragment());
-//                break;
-            case R.id.nav_my_carts:
+            case R.id.nav_user_order:
+                replaceFragment(new UserOrderFragment());
+                break;
+            case R.id.nav_user_cart:
                 replaceFragment(new UserCartFragment());
                 break;
 //            case R.id.nav_admin:

@@ -26,23 +26,23 @@
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/nav_offers"
+        android:id="@+id/nav_offer"
         android:name="com.example.diploma.ui.offer.OffersFragment"
         android:label="@string/menu_offers"
-        tools:layout="@layout/fragment_offers" />
+        tools:layout="@layout/fragment_offer" />
     <fragment
         android:id="@+id/nav_new_products"
         android:name="com.example.diploma.ui.product.NewProductsFragment"
         android:label="@string/menu_new_products"
         tools:layout="@layout/fragment_new_products" />
     <fragment
-        android:id="@+id/nav_my_orders"
-        android:name="com.example.diploma.ui.order.MyOrdersFragment"
+        android:id="@+id/nav_user_order"
+        android:name="com.example.diploma.ui.order.UserOrderFragment"
         android:label="@string/menu_orders"
-        tools:layout="@layout/fragment_my_orders" />
+        tools:layout="@layout/fragment_user_order" />
     <fragment
-        android:id="@+id/nav_my_carts"
+        android:id="@+id/nav_user_cart"
         android:name="com.example.diploma.ui.cart.UserCartFragment"
         android:label="@string/menu_carts"
-        tools:layout="@layout/fragment_my_carts" />
+        tools:layout="@layout/fragment_user_cart" />
 </navigation>

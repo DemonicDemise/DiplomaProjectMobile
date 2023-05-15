@@ -56,7 +56,7 @@ public class UserCartFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_cart, container, false);
+        View root = inflater.inflate(R.layout.fragment_user_cart, container, false);
 
         mDb = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
