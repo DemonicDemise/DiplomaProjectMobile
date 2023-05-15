@@ -12,7 +12,7 @@
         android:theme="@style/Theme.Diploma.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_main"
             app:titleTextColor="@color/black"
             android:layout_width="match_parent"
             app:title="@string/company_name"
