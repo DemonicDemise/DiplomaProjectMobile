@@ -53,7 +53,7 @@
                     android:textStyle="bold"
                     android:text="@string/popular_products"/>
                 <TextView
-                    android:id="@+id/view_all_products"
+                    android:id="@+id/view_all_popular_products"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -88,7 +88,7 @@
                     android:textStyle="bold"
                     android:text="@string/explore_products"/>
                 <TextView
-                    android:id="@+id/view_all_explore"
+                    android:id="@+id/view_all_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -123,7 +123,7 @@
                     android:textStyle="bold"
                     android:text="@string/recommended_products"/>
                 <TextView
-                    android:id="@+id/view_all_recommended"
+                    android:id="@+id/view_all_recommended_products"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -135,6 +135,7 @@
                     android:layout_marginRight="7dp"
                     android:text="@string/view_all"/>
             </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_margin="5dp"

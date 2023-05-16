@@ -1,5 +1,6 @@
 package com.example.diploma.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.diploma.R;
+import com.example.diploma.activities.NavCategoryActivity;
+import com.example.diploma.activities.ViewAllActivity;
 import com.example.diploma.adapters.HomeAdapter;
 import com.example.diploma.adapters.PopularAdapters;
 import com.example.diploma.adapters.RecommendedAdapter;
@@ -56,6 +60,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerViewSearch;
     private ViewAllAdapter viewAllAdapter;
     private ScrollView scrollView;
+    private TextView PopularPVA, RecommendedPVA, HomeCatPVA;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -69,12 +74,18 @@ public class HomeFragment extends Fragment {
         pb.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.GONE);
 
+        PopularPVA = binding.viewAllPopularProducts;
+
+        RecommendedPVA = binding.viewAllRecommendedProducts;
+
+        HomeCatPVA = binding.viewAllCategory;
+
         popularRec = binding.popRec;
 
         //popular items
-        popularRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
+        popularRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false));
         popularModelList = new ArrayList<>();
-        popularAdapters = new PopularAdapters(getActivity(),popularModelList);
+        popularAdapters = new PopularAdapters(getActivity(), popularModelList);
         popularRec.setAdapter(popularAdapters);
 
         db.collection("PopularProducts")
@@ -90,13 +101,22 @@ public class HomeFragment extends Fragment {
 
                                 pb.setVisibility(View.GONE);
                                 scrollView.setVisibility(View.VISIBLE);
-
                             }
                         } else {
                             Toast.makeText(getActivity(), "Error" + task.getException(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
+
+        // View All Products
+        PopularPVA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ViewAllActivity.class);
+                intent.putExtra("typeOfProduct","PopularProducts");
+                startActivity(intent);
+            }
+        });
 
         //Home Category item
         homeRec = binding.catRec;
@@ -123,6 +143,16 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
+        // View All Home Products
+        HomeCatPVA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ViewAllActivity.class);
+                intent.putExtra("typeOfProduct","HomeCategory");
+                startActivity(intent);
+            }
+        });
+
         //Recommended item
         recRec = binding.recRec;
 
@@ -148,6 +178,17 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
+        // View All Home Products
+        RecommendedPVA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ViewAllActivity.class);
+                intent.putExtra("typeOfProduct","RecommendedProducts");
+                startActivity(intent);
+            }
+        });
+
+        // Search
         search_box = root.findViewById(R.id.search_box);
         recyclerViewSearch = root.findViewById(R.id.search_rec);
         viewAllModelList = new ArrayList<>();
@@ -159,12 +200,10 @@ public class HomeFragment extends Fragment {
         search_box.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override

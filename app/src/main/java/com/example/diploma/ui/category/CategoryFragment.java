@@ -76,22 +76,12 @@ public class CategoryFragment extends Fragment {
                                 navCategoryAdapter.notifyDataSetChanged();
                                 progressBar.setVisibility(View.GONE);
                                 recyclerView.setVisibility(View.VISIBLE);
-//                                Intent intent = new Intent(getContext(), NavCategoryActivity.class);
-//                                startActivity(intent);
                             }
                         } else {
                             Toast.makeText(getActivity(), "Error " + task.getException(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-
-
-//        categoryDetailModelsList = new ArrayList<>();
-//        navCategoryDetailAdapter = new NavCategoryDetailAdapter(getActivity(), categoryDetailModelsList);
-//        recyclerView.setAdapter(navCategoryDetailAdapter);
-//
-//        progressBar.setVisibility(View.VISIBLE);
-//        recyclerView.setVisibility(View.GONE);
 
         return root;
     }

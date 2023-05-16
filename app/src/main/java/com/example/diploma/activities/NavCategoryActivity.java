@@ -28,7 +28,6 @@ public class NavCategoryActivity extends AppCompatActivity {
     private NavCategoryDetailAdapter adapter;
     private FirebaseFirestore mDb;
     private ProgressBar progressBar;
-
     private String type;
 
     @Override
