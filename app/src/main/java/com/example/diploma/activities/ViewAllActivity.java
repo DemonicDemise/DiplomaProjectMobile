@@ -51,9 +51,9 @@ public class ViewAllActivity extends AppCompatActivity {
 
         pb = findViewById(R.id.view_all_progress_bar);
 
-        //Getting breakfasts
-        if (type != null && type.equalsIgnoreCase("vegetable")) {
-            firestore.collection("AllProducts").whereEqualTo("type", "vegetable")
+        //Getting rings
+        if (type != null && type.equalsIgnoreCase("rings")) {
+            firestore.collection("AllProducts").whereEqualTo("type", "rings")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -83,9 +83,9 @@ public class ViewAllActivity extends AppCompatActivity {
                     });
         }
 
-        //Getting breakfasts
-        if (type != null && type.equalsIgnoreCase("breakfast")) {
-            firestore.collection("AllProducts").whereEqualTo("type", "breakfast")
+        //Getting rings
+        if (type != null && type.equalsIgnoreCase("blezik")) {
+            firestore.collection("AllProducts").whereEqualTo("type", "blezik")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -131,19 +131,5 @@ public class ViewAllActivity extends AppCompatActivity {
                     });
         }
 
-//        if(type != null && type.equalsIgnoreCase("phone")){
-//            firestore.collection("AllProducts").whereEqualTo("type","phone")
-//                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                            for (DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
-//                                ViewAllModel viewAllModel = documentSnapshot.toObject(ViewAllModel.class);
-//                                viewAllModelList.add(viewAllModel);
-//                                viewAllAdapter.notifyDataSetChanged();
-//                                recyclerView.setVisibility(View.VISIBLE);
-//                            }
-//                        }
-//                    });
-//          }
     }
 }

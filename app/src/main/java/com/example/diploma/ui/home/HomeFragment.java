@@ -54,7 +54,6 @@ public class HomeFragment extends Fragment {
     private FirebaseFirestore db;
     private RecyclerView popularRec, homeRec, recRec;
     private ProgressBar pb;
-
     private EditText search_box;
     private List<ViewAllModel> viewAllModelList;
     private RecyclerView recyclerViewSearch;

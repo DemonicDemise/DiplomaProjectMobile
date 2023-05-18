@@ -20,12 +20,15 @@ import com.example.diploma.models.ViewAllModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.WriteBatch;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
 
 public class DetailActivity extends AppCompatActivity {
     private ImageView detailedImg;
@@ -84,6 +87,7 @@ public class DetailActivity extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                topAddedToCart();
                 addedToCart();
             }
         });
@@ -172,7 +176,6 @@ public class DetailActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Wait you are not logged in!", Toast.LENGTH_LONG).show();
             finish();
         }
-
     }
 
     private void addedToCart() {
@@ -210,4 +213,25 @@ public class DetailActivity extends AppCompatActivity {
             finish();
         }
    }
+
+    private void topAddedToCart() {
+
+        String name = viewAllModel.getName();
+
+        Map<String, Object> topMap = new HashMap<>();
+        topMap.put(name, viewAllModel.getName());
+
+        if(mAuth.getCurrentUser() != null) {
+            mFirestore.collection("UpdatePopularProducts").
+                    add(topMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                        }
+                    });
+        }else{
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            Toast.makeText(getApplicationContext(), "Wait you are not logged in!", Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
 }

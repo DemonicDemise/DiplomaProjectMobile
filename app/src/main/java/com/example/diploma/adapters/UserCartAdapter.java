@@ -76,6 +76,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.ViewHo
 //            }
 //        });
 
+
         holder.deleteItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

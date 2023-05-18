@@ -120,20 +120,6 @@ public class UserCartFragment extends Fragment {
                                 view.findViewById(R.id.checkout_bottom_container)
                         );
 
-//                bottomSheetView.findViewById(R.id.select_method_spinner).setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Spinner spinner = (Spinner) root.findViewById(R.id.select_method_spinner);
-//                        // Create an ArrayAdapter using the string array and a default spinner layout
-//                        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-//                                R.array.animals, android.R.layout.simple_spinner_item);
-//                        // Specify the layout to use when the list of choices appears
-//                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                        // Apply the adapter to the spinner
-//                        spinner.setAdapter(adapter);
-//                    }
-//                });
-
                 bottomSheetView.findViewById(R.id.place_order_button).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -148,25 +134,6 @@ public class UserCartFragment extends Fragment {
                 bottomSheetDialog.show();
             }
         });
-
-
-//        String[] country = {"India", "USA", "Japan", "Singapore"};
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, country);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        selectMethodSpinner.setAdapter(adapter);
-//
-//        selectMethodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                String value = adapterView.getItemAtPosition(i).toString();
-//                Toast.makeText(getActivity(), value, Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
 
         return root;
     }
