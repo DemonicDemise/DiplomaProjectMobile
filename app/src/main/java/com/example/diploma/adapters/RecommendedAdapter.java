@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         holder.name.setText(recList.get(position).getName());
         holder.description.setText(recList.get(position).getDescription());
         holder.rating.setText(recList.get(position).getRating());
+        holder.ratingBar.setRating((int)Double.parseDouble(recList.get(position).getRating()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +66,8 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         private ImageView recImg;
         private TextView name, description, rating;
 
+        private RatingBar ratingBar;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,6 +75,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
             name = itemView.findViewById(R.id.rec_name);
             description = itemView.findViewById(R.id.rec_desc);
             rating = itemView.findViewById(R.id.rec_rating);
+            ratingBar = itemView.findViewById(R.id.rating_bar);
         }
     }
 }

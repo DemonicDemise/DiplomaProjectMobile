@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,8 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
         holder.rating.setText(popularModelList.get(position).getRating());
         holder.description.setText(popularModelList.get(position).getDescription());
         holder.discount.setText(popularModelList.get(position).getDiscount());
+        holder.ratingBar.setRating((int)Double.parseDouble(popularModelList.get(position).getRating()));
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,8 +62,10 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView popImg;
-        TextView name, description, rating, discount;
+        private ImageView popImg;
+        private TextView name, description, rating, discount;
+
+        private RatingBar ratingBar;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -69,6 +74,7 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
             description = itemView.findViewById(R.id.pop_desc);
             rating = itemView.findViewById(R.id.pop_rating);
             discount = itemView.findViewById(R.id.pop_discount);
+            ratingBar = itemView.findViewById(R.id.ratingBar_small);
         }
     }
 }

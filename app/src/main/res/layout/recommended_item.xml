@@ -44,12 +44,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RatingBar
+                android:id="@+id/rating_bar"
                 style="?android:attr/ratingBarStyleSmall"
                 android:theme="@style/MyRatingBar"
-                android:layout_height="30dp"
-                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_width="30dp"
+                android:rating="4"
+                android:stepSize="1"
                 android:layout_marginTop="5dp"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:numStars="4" />
             <TextView
                 android:id="@+id/rec_rating"
