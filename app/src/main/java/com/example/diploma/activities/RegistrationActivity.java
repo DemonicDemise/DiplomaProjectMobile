@@ -27,6 +27,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private ProgressBar pb;
 
+    private Boolean valid = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,25 +45,33 @@ public class RegistrationActivity extends AppCompatActivity {
         pb = findViewById(R.id.progressbar);
         pb.setVisibility(View.GONE);
 
-        signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
-            }
-        });
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createUser();
-                pb.setVisibility(View.VISIBLE);
-               // pCreateUser();
-            }
-        });
+        checkField(name);
+        checkField(email);
+        checkField(password);
+
+        if(valid) {
+            signIn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+                }
+            });
+            signUp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    createUser();
+                    pb.setVisibility(View.VISIBLE);
+                }
+            });
+        }
+
+
     }
     private void createUser() {
         String userName = name.getText().toString();
         String userEmail = email.getText().toString();
         String userPassword = password.getText().toString();
+
 
         if(TextUtils.isEmpty(userName)){
             Toast.makeText(this,"Name is Empty!", Toast.LENGTH_LONG).show();
@@ -80,6 +90,8 @@ public class RegistrationActivity extends AppCompatActivity {
             return;
         }
 
+
+
         mAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -95,6 +107,17 @@ public class RegistrationActivity extends AppCompatActivity {
                         Toast.makeText(RegistrationActivity.this, "Error:" + task.getException(),Toast.LENGTH_LONG);
                     }
                 });
+    }
+
+    private boolean checkField(EditText textField) {
+        if(textField.getText().toString().isEmpty()){
+            textField.setText("Error");
+            valid = false;
+        } else {
+            valid = true;
+        }
+
+        return valid;
     }
 
 //    private void pCreateUser() throws SQLException {

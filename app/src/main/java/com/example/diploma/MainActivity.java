@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDb = FirebaseDatabase.getInstance();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+
         setContentView(binding.getRoot());
 
         drawerLayout = binding.drawerLayout;
@@ -72,13 +73,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Toolbar
         setSupportActionBar(toolbar);
 
-//        logoImg = findViewById(R.id.logoImg);
-//        logoImg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//            }
-//        });
 
         if(mAuth.getCurrentUser() == null) {
             Intent intent = new Intent(getApplication(), LoginActivity.class);
@@ -176,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_rate_us:
                 Toast.makeText(getApplicationContext(), R.string.rate_us, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 break;
         }
 //        logoImg.setVisibility(View.GONE);

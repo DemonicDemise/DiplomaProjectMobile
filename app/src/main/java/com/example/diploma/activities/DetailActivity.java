@@ -78,7 +78,7 @@ public class DetailActivity extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(viewAllModel.getImg_url()).into(detailedImg);
             rating.setText(viewAllModel.getRating());
             description.setText(viewAllModel.getDescription());
-            price.setText(viewAllModel.getPrice() + "$");
+            price.setText(viewAllModel.getPrice() + "₸");
 
             totalPrice = totalQuantity * Integer.valueOf(viewAllModel.getPrice());
         }

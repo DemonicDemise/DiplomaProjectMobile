@@ -29,7 +29,11 @@ import android.widget.Toast;
 
 import com.example.diploma.R;
 import com.example.diploma.activities.PlaceOrderActivity;
+import com.example.diploma.adapters.DiscountAdapter;
+import com.example.diploma.adapters.HomeAdapter;
 import com.example.diploma.adapters.UserCartAdapter;
+import com.example.diploma.models.DiscountModel;
+import com.example.diploma.models.HomeModel;
 import com.example.diploma.models.UserCartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,6 +41,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
@@ -63,6 +68,12 @@ public class UserCartFragment extends Fragment {
     private TextView overTotalAmount;
     private Button buyNow;
     private String documentId;
+
+    private RecyclerView discountRec;
+
+    private List<DiscountModel> discountModelList;
+
+    private DiscountAdapter discountAdapter;
 
     private Spinner spinner;
 
@@ -105,10 +116,6 @@ public class UserCartFragment extends Fragment {
         configuration = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
                 .clientId(clientId);
 
-        //spinner = root.findViewById(R.id.select_method_spinner);
-
-        //selectMethodSpinner = root.findViewById(R.id.select_method_spinner);
-
         if(mAuth.getCurrentUser() != null) {
             mDb.collection("CurrentUser").document(mAuth.getCurrentUser().getUid())
                     .collection("AddToCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -147,16 +154,61 @@ public class UserCartFragment extends Fragment {
                                 view.findViewById(R.id.checkout_bottom_container)
                         );
 
+                totalCost = bottomSheetView.findViewById(R.id.total_cost);
+
+                totalCost.setText((int) calculateSum(userCartModelList) + "₸");
+
+                bottomSheetView.findViewById(R.id.pick_discount).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        View bottomSheetView2 = LayoutInflater.from(getContext())
+                                .inflate(
+                                        R.layout.pick_discount_layout,
+                                        view.findViewById(R.id.checkout_bottom_container)
+                                );
+                        bottomSheetDialog.setContentView(bottomSheetView2);
+                        discountRec = bottomSheetView2.findViewById(R.id.discount_rec);
+                        discountRec.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+                        discountModelList = new ArrayList<>();
+                        discountAdapter = new DiscountAdapter(getContext(), discountModelList);
+                        discountRec.setAdapter(discountAdapter);
+
+                        mDb.collection("Discount")
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                DiscountModel discountModel = document.toObject(DiscountModel.class);
+                                                discountModelList.add(discountModel);
+                                                discountAdapter.notifyDataSetChanged();
+                                            }
+                                        } else {
+                                            Toast.makeText(getContext(), "Error" + task.getException(), Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });
+                        bottomSheetView2.findViewById(R.id.return_button).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                bottomSheetDialog.setContentView(bottomSheetView);
+                            }
+                        });
+
+                    }
+                });
+
                 bottomSheetView.findViewById(R.id.place_order_button).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        totalCost = root.findViewById(R.id.total_cost);
 
                         Toast.makeText(getContext(), "Place Order", Toast.LENGTH_LONG).show();
                         bottomSheetDialog.dismiss();
                         getPayment();
                     }
                 });
+
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
             }
@@ -166,7 +218,7 @@ public class UserCartFragment extends Fragment {
     }
 
     private void getPayment() {
-        String amount = "1";
+        String amount = String.valueOf((int)calculateSum(userCartModelList));
 
         PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(amount)),"USD","Code with Arvant", PayPalPayment.PAYMENT_INTENT_SALE);
 
@@ -178,15 +230,22 @@ public class UserCartFragment extends Fragment {
         payPalActivityResultLauncher.launch(intent);
     }
 
-
+    public double calculateSum(List<UserCartModel> list) {
+        double totalSum = 0.0;
+        for(UserCartModel model: list){
+            totalSum += model.getTotalPrice();
+        }
+        return totalSum;
+    }
 
     public void calculateSumList(List<UserCartModel> list) {
         double totalSum = 0.0;
         for(UserCartModel model: list){
             totalSum += model.getTotalPrice();
         }
-        overTotalAmount.setText("Total Sum: " + totalSum);
+        overTotalAmount.setText("Total Sum: " + (int)totalSum + "₸");
     }
+
 
     ActivityResultLauncher<Intent> payPalActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),

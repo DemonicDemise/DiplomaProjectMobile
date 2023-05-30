@@ -55,8 +55,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView catImg;
-        TextView name;
+        private ImageView catImg;
+        private TextView name;
 
 
         public ViewHolder(@NonNull View itemView) {

@@ -52,30 +52,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.ViewHo
         holder.date.setText(userCartModelList.get(position).getCurrentDate());
         holder.time.setText(userCartModelList.get(position).getCurrentTime());
         holder.quantity.setText(userCartModelList.get(position).getTotalQuantity());
-        holder.totalPrice.setText(String.valueOf(userCartModelList.get(position).getTotalPrice()) + "$");
-
-
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                bottomSheetDialog = new BottomSheetDialog(context,R.style.BottomSheetDialogTheme);
-//                View bottomSheetView = LayoutInflater.from(context)
-//                        .inflate(
-//                                R.layout.checkout_bottom_layout,
-//                                view.findViewById(R.id.checkout_bottom_container)
-//                        );
-//                bottomSheetView.findViewById(R.id.place_order_button).setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Toast.makeText(context, "Place Order", Toast.LENGTH_LONG).show();
-//                        bottomSheetDialog.dismiss();
-//                    }
-//                });
-//                bottomSheetDialog.setContentView(bottomSheetView);
-//                bottomSheetDialog.show();
-//            }
-//        });
-
+        holder.totalPrice.setText(String.valueOf(userCartModelList.get(position).getTotalPrice()) + "₸");
 
         holder.deleteItem.setOnClickListener(new View.OnClickListener() {
             @Override

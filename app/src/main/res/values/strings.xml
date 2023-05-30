@@ -88,7 +88,7 @@
     <string name="agreement">By placing an order you agree to our \n<b>Terms</b> And <b>Conditions</b></string>
     <string name="place_order">Place Order</string>
     <string name="favourites">Favourites</string>
-    <string name="delivery">Delivery</string>
+    <string name="paypal">PayPal</string>
     <string name="payment">Payment</string>
     <string name="promo_code">Promo Code</string>
     <string name="total_cost">Total Cost</string>
