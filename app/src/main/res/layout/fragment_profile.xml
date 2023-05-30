@@ -68,7 +68,7 @@
         app:layout_constraintTop_toBottomOf="@+id/input_name_profile" />
 
     <EditText
-        android:id="@+id/input_city_profile"
+        android:id="@+id/input_password_profile"
         android:layout_width="0dp"
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
@@ -97,6 +97,6 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_city_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/input_password_profile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

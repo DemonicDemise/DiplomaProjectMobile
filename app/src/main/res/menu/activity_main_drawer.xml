@@ -54,11 +54,11 @@ tools:showIn="navigation_view">
 <item android:title="Communicate">
     <menu>
         <group android:checkableBehavior="single">
-            <item
-                android:id="@+id/nav_admin"
-                android:icon="@drawable/ic_admin"
-                android:title="@string/admin_page"
-                />
+<!--            <item-->
+<!--                android:id="@+id/nav_admin"-->
+<!--                android:icon="@drawable/ic_admin"-->
+<!--                android:title="@string/admin_page"-->
+<!--                />-->
             <item
                 android:id="@+id/nav_rate_us"
                 android:icon="@drawable/ic_rate"

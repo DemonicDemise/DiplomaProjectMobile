@@ -1,11 +1,16 @@
 package com.example.diploma.ui.cart;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -33,8 +38,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +63,17 @@ public class UserCartFragment extends Fragment {
     private TextView overTotalAmount;
     private Button buyNow;
     private String documentId;
+
     private Spinner spinner;
+
+    private TextView totalCost;
+
+    private static PayPalConfiguration configuration;
+
+    private String clientId = "AZQu2eoYgxAQaHMkTZbYRdfeLPH0Qz3MI1QTRWS_JNpJ4DvW8TuRjCza7KE8-v-ziVyG6UO7alZYLBQD";
+
+    private int PAYPAL_REQUEST_CODE = 123;
+
     public UserCartFragment(){
     }
     @Nullable
@@ -77,6 +101,9 @@ public class UserCartFragment extends Fragment {
 
         progressBar.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
+
+        configuration = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+                .clientId(clientId);
 
         //spinner = root.findViewById(R.id.select_method_spinner);
 
@@ -123,11 +150,11 @@ public class UserCartFragment extends Fragment {
                 bottomSheetView.findViewById(R.id.place_order_button).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        totalCost = root.findViewById(R.id.total_cost);
+
                         Toast.makeText(getContext(), "Place Order", Toast.LENGTH_LONG).show();
                         bottomSheetDialog.dismiss();
-                        Intent intent = new Intent(getActivity(), PlaceOrderActivity.class);
-                        intent.putExtra("itemList", (Serializable) userCartModelList);
-                        startActivity(intent);
+                        getPayment();
                     }
                 });
                 bottomSheetDialog.setContentView(bottomSheetView);
@@ -138,6 +165,21 @@ public class UserCartFragment extends Fragment {
         return root;
     }
 
+    private void getPayment() {
+        String amount = "1";
+
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(amount)),"USD","Code with Arvant", PayPalPayment.PAYMENT_INTENT_SALE);
+
+        Intent intent = new Intent(getContext(), PaymentActivity.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, configuration);
+        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
+
+        //startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+        payPalActivityResultLauncher.launch(intent);
+    }
+
+
+
     public void calculateSumList(List<UserCartModel> list) {
         double totalSum = 0.0;
         for(UserCartModel model: list){
@@ -145,4 +187,42 @@ public class UserCartFragment extends Fragment {
         }
         overTotalAmount.setText("Total Sum: " + totalSum);
     }
+
+    ActivityResultLauncher<Intent> payPalActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    Intent data = result.getData();
+                    if(result.getResultCode() == PAYPAL_REQUEST_CODE && data.getData() != null) {
+                        PaymentConfirmation paymentConfirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+
+                        if(paymentConfirmation != null){
+                            try {
+                                String paymentDetails = paymentConfirmation.toJSONObject().toString();
+                                JSONObject object = new JSONObject(paymentDetails);
+                                Intent intent = new Intent(getActivity(), PlaceOrderActivity.class);
+                                intent.putExtra("itemList", (Serializable) userCartModelList);
+                                startActivity(intent);
+                            }catch (JSONException e){
+                                Toast.makeText(getContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), PlaceOrderActivity.class);
+                                intent.putExtra("itemList", (Serializable) userCartModelList);
+                                startActivity(intent);
+                            }
+                        }
+                    } else if(result.getResultCode() == Activity.RESULT_CANCELED){
+                        Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), PlaceOrderActivity.class);
+                        intent.putExtra("itemList", (Serializable) userCartModelList);
+                        startActivity(intent);
+                    } else if(result.getResultCode() == PaymentActivity.RESULT_EXTRAS_INVALID){
+                        Toast.makeText(getContext(), "Invalid payment", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), PlaceOrderActivity.class);
+                        intent.putExtra("itemList", (Serializable) userCartModelList);
+                        startActivity(intent);
+                    }
+                }
+            }
+    );
 }

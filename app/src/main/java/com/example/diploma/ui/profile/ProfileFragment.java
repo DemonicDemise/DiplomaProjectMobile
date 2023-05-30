@@ -31,6 +31,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.math.BigDecimal;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -55,9 +65,8 @@ public class ProfileFragment extends Fragment {
         navBackgroundImg = root.findViewById(R.id.nav_background_img);
         name = root.findViewById(R.id.input_name_profile);
         email = root.findViewById(R.id.input_email_profile);
-        city = root.findViewById(R.id.input_city_profile);
+        city = root.findViewById(R.id.input_password_profile);
         upd = root.findViewById(R.id.btnUpdate);
-
 
         mDb.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -97,19 +106,16 @@ public class ProfileFragment extends Fragment {
         upd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateUserProfile();
-                updateNavBackgroundImg();
+//                updateUserProfile();
+//                updateNavBackgroundImg();
+
             }
         });
+
 
         return root;
     }
 
-    private void updateNavBackgroundImg() {
-    }
-
-    private void updateUserProfile() {
-    }
 
     ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),

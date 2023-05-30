@@ -20,9 +20,9 @@
             app:title="@string/company_name"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_menu"
-            android:background="?attr/colorPrimary"
+            android:background="@color/white"
             android:minHeight="?attr/actionBarSize"
-            app:popupTheme="@style/Theme.Diploma.PopupOverlay" />
+            app:popupTheme="@style/Theme.Diploma.AppBarOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
