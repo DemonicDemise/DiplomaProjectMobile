@@ -18,6 +18,7 @@ import com.example.diploma.ui.cart.UserCartFragment;
 import com.example.diploma.ui.category.CategoryFragment;
 import com.example.diploma.ui.favourite.FavouriteFragment;
 import com.example.diploma.ui.home.HomeFragment;
+import com.example.diploma.ui.offer.OffersFragment;
 import com.example.diploma.ui.order.UserOrderFragment;
 import com.example.diploma.ui.profile.ProfileFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -170,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_rate_us:
                 Toast.makeText(getApplicationContext(), R.string.rate_us, Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                replaceFragment(new OffersFragment());
                 break;
         }
 //        logoImg.setVisibility(View.GONE);

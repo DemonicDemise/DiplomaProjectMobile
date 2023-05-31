@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.diploma.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class OffersFragment extends Fragment {
 
@@ -20,5 +21,6 @@ public class OffersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_offer, container, false);
+
     }
 }
