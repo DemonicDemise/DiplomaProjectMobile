@@ -1,10 +1,7 @@
 package com.example.diploma.ui.cart;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
@@ -14,7 +11,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,10 +26,8 @@ import android.widget.Toast;
 import com.example.diploma.R;
 import com.example.diploma.activities.PlaceOrderActivity;
 import com.example.diploma.adapters.DiscountAdapter;
-import com.example.diploma.adapters.HomeAdapter;
 import com.example.diploma.adapters.UserCartAdapter;
 import com.example.diploma.models.DiscountModel;
-import com.example.diploma.models.HomeModel;
 import com.example.diploma.models.UserCartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -77,7 +71,7 @@ public class UserCartFragment extends Fragment {
 
     private Spinner spinner;
 
-    private TextView totalCost;
+    private TextView totalCost, pickDiscount;
 
     private static PayPalConfiguration configuration;
 
@@ -145,6 +139,17 @@ public class UserCartFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                Bundle bundle = getArguments();
+
+                String name = "Pick Discount";
+                String percent = "20";
+
+                if (bundle != null) {
+                    name = bundle.getString("name");
+                    percent = bundle.getString("percent");
+                }
+
+
                 final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                         getContext(), R.style.BottomSheetDialogTheme
                 );
@@ -158,6 +163,10 @@ public class UserCartFragment extends Fragment {
 
                 totalCost.setText((int) calculateSum(userCartModelList) + "₸");
 
+                pickDiscount = bottomSheetView.findViewById(R.id.pick_discount);
+
+                pickDiscount.setText(name);
+
                 bottomSheetView.findViewById(R.id.pick_discount).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -168,7 +177,8 @@ public class UserCartFragment extends Fragment {
                                 );
                         bottomSheetDialog.setContentView(bottomSheetView2);
                         discountRec = bottomSheetView2.findViewById(R.id.discount_rec);
-                        discountRec.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+
+                        discountRec.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false));
                         discountModelList = new ArrayList<>();
                         discountAdapter = new DiscountAdapter(getContext(), discountModelList);
                         discountRec.setAdapter(discountAdapter);
@@ -185,24 +195,23 @@ public class UserCartFragment extends Fragment {
                                                 discountAdapter.notifyDataSetChanged();
                                             }
                                         } else {
-                                            Toast.makeText(getContext(), "Error" + task.getException(), Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getActivity(), "Error" + task.getException(), Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 });
+
                         bottomSheetView2.findViewById(R.id.return_button).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 bottomSheetDialog.setContentView(bottomSheetView);
                             }
                         });
-
                     }
                 });
 
                 bottomSheetView.findViewById(R.id.place_order_button).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         Toast.makeText(getContext(), "Place Order", Toast.LENGTH_LONG).show();
                         bottomSheetDialog.dismiss();
                         getPayment();

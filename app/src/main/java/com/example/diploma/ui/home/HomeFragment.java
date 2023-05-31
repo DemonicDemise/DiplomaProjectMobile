@@ -15,15 +15,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.diploma.R;
-import com.example.diploma.activities.NavCategoryActivity;
 import com.example.diploma.activities.ViewAllActivity;
 import com.example.diploma.adapters.HomeAdapter;
-import com.example.diploma.adapters.PopularAdapters;
+import com.example.diploma.adapters.PopularAdapter;
 import com.example.diploma.adapters.RecommendedAdapter;
 import com.example.diploma.adapters.ViewAllAdapter;
 import com.example.diploma.databinding.FragmentHomeBinding;
@@ -33,7 +31,6 @@ import com.example.diploma.models.RecommendedModel;
 import com.example.diploma.models.ViewAllModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -48,7 +45,7 @@ public class HomeFragment extends Fragment {
     private List<PopularModel> popularModelList;
     private List<HomeModel> homeModelList;
     private List<RecommendedModel> recommendedModelList;
-    private PopularAdapters popularAdapters;
+    private PopularAdapter popularAdapters;
     private HomeAdapter homeAdapter;
     private RecommendedAdapter recommendedAdapter;
     private FirebaseFirestore db;
@@ -84,7 +81,7 @@ public class HomeFragment extends Fragment {
         //popular items
         popularRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false));
         popularModelList = new ArrayList<>();
-        popularAdapters = new PopularAdapters(getActivity(), popularModelList);
+        popularAdapters = new PopularAdapter(getActivity(), popularModelList);
         popularRec.setAdapter(popularAdapters);
 
         db.collection("PopularProducts")

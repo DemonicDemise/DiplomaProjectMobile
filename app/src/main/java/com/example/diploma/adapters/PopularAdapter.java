@@ -19,24 +19,24 @@ import com.example.diploma.models.PopularModel;
 
 import java.util.List;
 
-public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHolder> {
+public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
 
     private Context context;
     private List<PopularModel> popularModelList;
 
-    public PopularAdapters(Context context, List<PopularModel> popularModelList) {
+    public PopularAdapter(Context context, List<PopularModel> popularModelList) {
         this.context = context;
         this.popularModelList = popularModelList;
     }
 
     @NonNull
     @Override
-    public PopularAdapters.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PopularAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.popular_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PopularAdapters.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PopularAdapter.ViewHolder holder, int position) {
 
         Glide.with(context).load(popularModelList.get(position).getImg_url()).into(holder.popImg);
         holder.name.setText(popularModelList.get(position).getName());
