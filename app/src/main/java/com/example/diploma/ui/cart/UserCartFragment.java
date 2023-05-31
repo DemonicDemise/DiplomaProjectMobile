@@ -214,7 +214,10 @@ public class UserCartFragment extends Fragment {
                     public void onClick(View view) {
                         Toast.makeText(getContext(), "Place Order", Toast.LENGTH_LONG).show();
                         bottomSheetDialog.dismiss();
-                        getPayment();
+                        //getPayment();
+                        Intent intent = new Intent(getContext(), PaymentActivity.class);
+                        intent.putExtra("payment_submitted", String.valueOf((int)calculateSum(userCartModelList)));
+                        startActivity(intent);
                     }
                 });
 

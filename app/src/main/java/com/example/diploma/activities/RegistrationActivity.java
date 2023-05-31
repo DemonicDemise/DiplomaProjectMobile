@@ -27,7 +27,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private ProgressBar pb;
 
-    private Boolean valid = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +43,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         pb = findViewById(R.id.progressbar);
         pb.setVisibility(View.GONE);
-
-        checkField(name);
-        checkField(email);
-        checkField(password);
-
-        if(valid) {
-            signIn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
-                }
-            });
-            signUp.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    createUser();
-                    pb.setVisibility(View.VISIBLE);
-                }
-            });
-        }
 
 
     }
@@ -108,20 +87,4 @@ public class RegistrationActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    private boolean checkField(EditText textField) {
-        if(textField.getText().toString().isEmpty()){
-            textField.setText("Error");
-            valid = false;
-        } else {
-            valid = true;
-        }
-
-        return valid;
-    }
-
-//    private void pCreateUser() throws SQLException {
-//        Connection conn = DriverManager.getConnection("jdbc:postgresql://<host>:<port>/<database>", "<username>", "<password>");
-//
-//    }
 }
